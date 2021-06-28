@@ -1,6 +1,10 @@
 function App() {
   return (
     <div className="wrapper clear">
+      <div className="overlay">
+        <div className="drawer"></div>
+      </div>
+
       <header className="d-flex justify-between align-center p-40">
         <div className="d-flex align-center">
           <img width={40} heigth={40} src="/img/logo.png" />
@@ -20,10 +24,19 @@ function App() {
         </ul>
       </header>
       <div className="content p-40">
-        <h1 className="mb-40">Все кроссовки</h1>
+        <div className="d-flex align-center justify-between mb-40">
+          <h1>Все кроссовки</h1>
+          <div className="search-block d-flex">
+            <img src="/img/search.svg" alt="Search" />
+            <input placeholder="Поиск ..." />
+          </div>
+        </div>
 
         <div className="d-flex">
           <div className="card">
+            <div className="favorite">
+              <img src="/img/unlike.svg" alt="Unliked" />
+            </div>
             <img width={140} height={120} src="/img/sneakers/1.jpg" alt="sneakers" />
             <h5>Мужские кроссовки Nike Blazer</h5>
             <div className="d-flex justify-between align-center">
