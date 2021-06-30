@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cart = () => {
+function Cart() {
   return (
     <div style={{ display: 'none' }} className="overlay">
       <div className="drawer">
@@ -61,6 +61,6 @@ const Cart = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Cart;
