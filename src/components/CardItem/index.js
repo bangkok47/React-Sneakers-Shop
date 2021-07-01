@@ -2,14 +2,26 @@ import React from 'react';
 import styles from './CardItem.module.scss';
 
 function CardItem({ title, price, imageUrl }) {
-  const onClickButton = () => {
-    alert('клик по кнопке');
+  const [isChecked, setChecked] = React.useState(false);
+  const [isLiked, setLiked] = React.useState(false);
+
+  const onClickPlus = () => {
+    setChecked(!isChecked);
+    //инвертируем true/false
+  };
+
+  const onClickFavorite = () => {
+    setLiked(!isLiked);
   };
 
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
-        <img src="/img/unlike.svg" alt="Unliked" />
+        <img
+          onClick={onClickFavorite}
+          src={isLiked ? '/img/like.svg' : '/img/unlike.svg'}
+          alt="Unliked"
+        />
       </div>
       <img width={140} height={120} src={imageUrl} alt="sneakers" />
       <h5>{title}</h5>
@@ -18,9 +30,12 @@ function CardItem({ title, price, imageUrl }) {
           <span>Цена:</span>
           <b>{price} $</b>
         </div>
-        <button onClick={onClickButton} className="button">
-          <img width={20} height={20} src="/img/plus.svg" alt="plus" />
-        </button>
+        <img
+          className={styles.plus}
+          onClick={onClickPlus}
+          src={isChecked ? '/img/btn-checked.svg' : './img/btn-plus.svg'}
+          alt="plus"
+        />
       </div>
     </div>
   );
