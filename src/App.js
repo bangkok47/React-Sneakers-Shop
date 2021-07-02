@@ -7,18 +7,7 @@ import Cart from './components/Cart';
 
 function App() {
   const [items, setItems] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([
-    {
-      title: 'Мужские Кроссовки Nike Air Max 270',
-      price: 75,
-      imageUrl: '/img/sneakers/1.jpg',
-    },
-    {
-      title: 'Мужские Кроссовки Nike Blazer ',
-      price: 50,
-      imageUrl: '/img/sneakers/2.jpg',
-    },
-  ]);
+  const [cartItems, setCartItems] = React.useState([]);
   //console.log(cartItems);
   const [cartOpened, setCartOpened] = React.useState(false);
 
@@ -29,6 +18,10 @@ function App() {
       })
       .then((json) => setItems(json));
   }, []);
+
+  const onAddToCart = (obj) => {
+    setCartItems((prev) => [...prev, obj]);
+  };
 
   return (
     <div className="wrapper clear">
@@ -44,7 +37,12 @@ function App() {
         </div>
         <div className="d-flex flex-wrap">
           {items.map((obj) => (
-            <CardItem name={obj.title} price={obj.price} imageUrl={obj.imageUrl} />
+            <CardItem
+              title={obj.title}
+              price={obj.price}
+              imageUrl={obj.imageUrl}
+              onPlus={onAddToCart}
+            />
           ))}
         </div>
       </div>

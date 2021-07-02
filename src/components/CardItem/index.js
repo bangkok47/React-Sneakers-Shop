@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './CardItem.module.scss';
 
-function CardItem({ title, price, imageUrl }) {
+function CardItem({ title, price, imageUrl, onPlus }) {
   const [isChecked, setChecked] = React.useState(false);
   const [isLiked, setLiked] = React.useState(false);
 
   const onClickPlus = () => {
+    onPlus({ title, price, imageUrl });
     setChecked(!isChecked);
     //инвертируем true/false
   };
