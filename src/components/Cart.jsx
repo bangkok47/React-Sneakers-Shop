@@ -1,43 +1,31 @@
 import React from 'react';
 
-function Cart() {
+function Cart({ onClosed, items = [] }) {
+  console.log(items);
   return (
-    <div style={{ display: 'none' }} className="overlay">
+    <div className="overlay">
       <div className="drawer">
         <h2 className="mb-30 d-flex justify-between">
-          Корзина <img className="deleteBtn cu-p" src="img/btn-delete.svg" alt="Delete" />
+          Корзина
+          <img
+            onClick={onClosed}
+            className="deleteBtn cu-p"
+            src="img/btn-delete.svg"
+            alt="Delete"
+          />
         </h2>
 
         <div className="items">
-          <div className="cartItem p-5 d-flex align-center mb-10">
-            <img
-              className="mr-20"
-              width={70}
-              height={70}
-              src="/img/sneakers/1.jpg"
-              alt="Sneakers"
-            />
-            <div className="mr-20">
-              <p className="mb-5">Мужские кроссовки Nike Air Max</p>
-              <b>47 $</b>
+          {items.map((obj) => (
+            <div className="cartItem p-5 d-flex align-center mb-20">
+              <img className="mr-20" width={70} height={70} src={obj.imageUrl} alt="Sneakers" />
+              <div className="mr-20">
+                <p className="mb-5">{obj.title}</p>
+                <b>{obj.price} $</b>
+              </div>
+              <img className="deleteBtn" src="img/btn-delete.svg" alt="Delete" />
             </div>
-            <img className="deleteBtn" src="img/btn-delete.svg" alt="Delete" />
-          </div>
-
-          <div className="cartItem p-5 d-flex align-center mb-20">
-            <img
-              className="mr-20"
-              width={70}
-              height={70}
-              src="/img/sneakers/1.jpg"
-              alt="Sneakers"
-            />
-            <div className="mr-20">
-              <p className="mb-5">Мужские кроссовки Nike Air Max</p>
-              <b>47 $</b>
-            </div>
-            <img className="deleteBtn" src="img/btn-delete.svg" alt="Delete" />
-          </div>
+          ))}
         </div>
 
         <div className="cartTotalBlock">
