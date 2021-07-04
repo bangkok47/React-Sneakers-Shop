@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './CardItem.module.scss';
 
-function CardItem({ title, price, imageUrl, onPlus }) {
+function CardItem({ id, title, price, imageUrl, onPlus, onFavorite, favorited = false }) {
   const [isChecked, setChecked] = React.useState(false);
-  const [isLiked, setLiked] = React.useState(false);
+  const [isLiked, setLiked] = React.useState(favorited);
 
   const onClickPlus = () => {
     onPlus({ title, price, imageUrl });
@@ -12,17 +12,14 @@ function CardItem({ title, price, imageUrl, onPlus }) {
   };
 
   const onClickFavorite = () => {
+    onFavorite({ id, title, price, imageUrl });
     setLiked(!isLiked);
   };
 
   return (
     <div className={styles.card}>
-      <div className={styles.favorite}>
-        <img
-          onClick={onClickFavorite}
-          src={isLiked ? '/img/like.svg' : '/img/unlike.svg'}
-          alt="Unliked"
-        />
+      <div onClick={onClickFavorite} className={styles.favorite}>
+        <img src={isLiked ? '/img/like.svg' : '/img/unlike.svg'} alt="Unliked" />
       </div>
       <img width={140} height={120} src={imageUrl} alt="sneakers" />
       <h5>{title}</h5>
