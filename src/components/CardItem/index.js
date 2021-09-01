@@ -6,7 +6,7 @@ function CardItem({ id, title, price, imageUrl, onPlus, onFavorite, favorited = 
   const [isLiked, setLiked] = React.useState(favorited);
 
   const onClickPlus = () => {
-    onPlus({ title, price, imageUrl });
+    onPlus({ id, title, price, imageUrl });
     setChecked(!isChecked);
     //инвертируем true/false
   };

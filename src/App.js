@@ -30,15 +30,23 @@ function App() {
 
     axios.get(`${mockapi}/cart`).then((res) => setCartItems(res.data));
     //получаем с бэка добавленные кроссовки, и отображаем в корзине
-    axios.get(`${mockapi / favorites}`).then((res) => setFavorites(res.data));
+    axios.get(`${mockapi}/favorites`).then((res) => setFavorites(res.data));
     //с бэка данный какие кросы лайкнули
   }, []);
 
   const onAddToCart = (obj) => {
-    axios.post(`${mockapi}/cart`, obj);
-    //отправляем на бэк(mockAPI) кроссовки которые добавили в корзину
-
-    setCartItems((prev) => [...prev, obj]);
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)))
+      } else {
+        axios.post(`${mockapi}/cart`, obj);
+        //отправляем на бэк(mockAPI) кроссовки которые добавили в корзину
+        setCartItems((prev) => [...prev, obj]);
+      }
+     
+    } catch (error) {
+      
+    }
   };
 
   const onRemoveFromCart = (id) => {
@@ -48,6 +56,7 @@ function App() {
   };
 
   const onAddToFavorite = async (obj) => {
+  try {
     if (favorites.find((favObj) => favObj.id === obj.id)) {
       axios.delete(`${mockapi}/favorites/${obj.id}`);
       //удаляем с бэка по id
@@ -57,6 +66,9 @@ function App() {
       setFavorites((prev) => [...prev, data]);
       //если такого id нету, то создаем
     }
+  } catch (error) {
+    alert('Не удалось добавить в фавориты! =(')
+  }
   };
 
   const onChangeSearchInput = (event) => {

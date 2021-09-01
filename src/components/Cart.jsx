@@ -19,7 +19,7 @@ function Cart({ onClosed, onRemove, items = [] }) {
           <>
             <div className="items">
               {items.map((obj) => (
-                <div className="cartItem p-5 d-flex align-center mb-20">
+                <div key={obj.id} className="cartItem p-5 d-flex align-center mb-20">
                   <img className="mr-20" width={70} height={70} src={obj.imageUrl} alt="Sneakers" />
                   <div className="mr-20">
                     <p className="mb-5">{obj.title}</p>
@@ -64,7 +64,7 @@ function Cart({ onClosed, onRemove, items = [] }) {
             />
             <h2>Корзина пустая</h2>
             <p>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ!</p>
-            <button onClick={onClosed} class="greenButton">
+            <button onClick={onClosed} className="greenButton">
               <img src="/img/arrow.svg" alt="Arrow" />
               Вернуться назад
             </button>
